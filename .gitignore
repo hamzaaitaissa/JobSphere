@@ -1,0 +1,38 @@
+# Ignore build output and dependencies
+bin/
+obj/
+.vscode/
+*.user
+*.suo
+*.cache
+*.csproj.user
+*.dll
+*.exe
+*.pdb
+*.mdb
+*.log
+
+# Ignore environment & config files
+appsettings.json
+appsettings.Development.json
+secrets.json
+
+# Ignore Entity Framework migrations & database files
+Migrations/
+*.mdf
+*.ldf
+*.sqlite
+*.db
+
+# Ignore logs and debugging files
+logs/
+*.log
+*.ncrunch*
+TestResults/
+coverage/
+*.opendb
+
+# Ignore IDE-specific files
+.idea/
+*.sln.ide
+.vs/
