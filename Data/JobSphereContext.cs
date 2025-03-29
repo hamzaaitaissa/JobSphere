@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using JobSphere.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace JobSphere.Data
 {
