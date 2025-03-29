@@ -1,38 +1,35 @@
-# Ignore build output and dependencies
+# Ignore build and binary directories
 bin/
 obj/
-.vscode/
+
+# Ignore Visual Studio files
+.vs/
 *.user
 *.suo
 *.cache
-*.csproj.user
-*.dll
-*.exe
 *.pdb
-*.mdb
+
+# Ignore Rider / JetBrains files
+.idea/
+
+# Ignore MacOS system files
+.DS_Store
+
+# Ignore logs
+logs/
 *.log
 
-# Ignore environment & config files
+# Ignore npm packages (if applicable)
+node_modules/
+
+# Ignore dependency packages
+packages/
+!packages/repositories.config
+
+# Ignore config files containing sensitive information
 appsettings.json
 appsettings.Development.json
 secrets.json
 
-# Ignore Entity Framework migrations & database files
-Migrations/
-*.mdf
-*.ldf
-*.sqlite
-*.db
-
-# Ignore logs and debugging files
-logs/
-*.log
-*.ncrunch*
-TestResults/
-coverage/
-*.opendb
-
-# Ignore IDE-specific files
-.idea/
-*.sln.ide
-.vs/
+# Ignore temporary files
+temp/
