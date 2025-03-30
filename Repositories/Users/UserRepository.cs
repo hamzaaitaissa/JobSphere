@@ -2,7 +2,7 @@
 using JobSphere.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace JobSphere.Repositories
+namespace JobSphere.Repositories.Users
 {
     public class UserRepository : IUserRepository
     {
