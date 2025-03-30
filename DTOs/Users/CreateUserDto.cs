@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace JobSphere.DTOs
+namespace JobSphere.DTOs.Users
 {
-    public class UserDto
+    public record class CreateUserDto
     {
-        [Key]
-        public Guid Id { get; set; }
         [Required]
         [StringLength(50)]
         public string FullName { get; set; }

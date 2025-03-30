@@ -12,7 +12,14 @@ namespace JobSphere.Repositories.Users
         {
             _jobSphereContext = jobSphereContext;
         }
-        public async Task DeleteAsync(int id)
+        public async Task<User> CreateAsync(User user)
+        {
+            _jobSphereContext.Users.Add(user);
+            await _jobSphereContext.SaveChangesAsync();
+            return user;
+        }
+
+        public async Task DeleteAsync(Guid id)
         {
             var user = await _jobSphereContext.Users.FindAsync(id);
             if (user != null)
@@ -28,7 +35,7 @@ namespace JobSphere.Repositories.Users
             return users;
         }
 
-        public async Task<User> GetByIdAsync(int id)
+        public async Task<User> GetByIdAsync(Guid id)
         {
             var user = await _jobSphereContext.Users.FindAsync(id);
             if (user != null)
