@@ -1,10 +1,18 @@
 ﻿using JobSphere.DTOs.Users;
 using JobSphere.Entities;
+using JobSphere.Repositories;
 
 namespace JobSphere.Services.Users
 {
     public class UserService : IUserService
     {
+        private readonly IUserRepository _userRepository;
+
+        public UserService(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
+
         public Task<User> CreateUserAsync(CreateUserDto createUserDto)
         {
             throw new NotImplementedException();
