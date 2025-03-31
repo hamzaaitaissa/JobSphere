@@ -1,4 +1,5 @@
-﻿using JobSphere.DTOs.Users;
+﻿using AutoMapper;
+using JobSphere.DTOs.Users;
 using JobSphere.Entities;
 using JobSphere.Repositories;
 
@@ -7,15 +8,19 @@ namespace JobSphere.Services.Users
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
+            _mapper = mapper;
         }
 
-        public Task<User> CreateUserAsync(CreateUserDto createUserDto)
+        public async Task<User> CreateUserAsync(CreateUserDto createUserDto)
         {
-            throw new NotImplementedException();
+            var user = _mapper.Map<User>(createUserDto);
+            await _userRepository.CreateAsync(user);
+            return user;
         }
 
         public Task DeleteUserAsync()
