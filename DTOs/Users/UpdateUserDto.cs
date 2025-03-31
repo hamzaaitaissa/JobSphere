@@ -2,7 +2,7 @@
 
 namespace JobSphere.DTOs.Users
 {
-    public record class CreateUserDto
+    public class UpdateUserDto
     {
         [Required]
         [StringLength(50)]

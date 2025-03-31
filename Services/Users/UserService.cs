@@ -23,29 +23,37 @@ namespace JobSphere.Services.Users
             return user;
         }
 
-        public Task DeleteUserAsync()
+        public async Task DeleteUserAsync(int id)
         {
-            throw new NotImplementedException();
+            await _userRepository.DeleteAsync(id);
         }
 
-        public Task<IEnumerable<User>> GetAllUsersAsync()
+        public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
-            throw new NotImplementedException();
+            var users = await _userRepository.GetAllAsync();
+            var userDto = _mapper.Map<IEnumerable<User>>(users);
+            return userDto;
         }
 
-        public Task<User> GetUserByEmailAsync(string Email)
+        public async Task<User> GetUserByEmailAsync(string Email)
         {
-            throw new NotImplementedException();
+            var userEmail = await _userRepository.GetByUserEmailAsync(Email);
+            var userEmailDto = _mapper.Map<User>(userEmail);
+            return userEmailDto;
         }
 
-        public Task<User> GetUserByIdAsync(Guid id)
+        public async Task<User> GetUserByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var user = await _userRepository.GetByIdAsync(id);
+            var userDto = _mapper.Map<User>(user);
+            return userDto;
+
         }
 
-        public Task UpdateUserAsync()
+        public async Task UpdateUserAsync(UpdateUserDto updateUserDto, int id)
         {
-            throw new NotImplementedException();
+            var userDto = _mapper.Map<User>(updateUserDto);
+            await _userRepository.UpdateAsync(userDto);
         }
     }
 }
