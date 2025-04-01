@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using JobSphere.DTOs.Users;
 using JobSphere.Entities;
+using JobSphere.ENUMS;
 using JobSphere.Repositories;
+using Microsoft.AspNetCore.Identity;
 
 namespace JobSphere.Services.Users
 {
@@ -9,6 +11,7 @@ namespace JobSphere.Services.Users
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+        private readonly IPasswordHasher<User> _passwordHasher;
 
         public UserService(IUserRepository userRepository, IMapper mapper)
         {
@@ -18,7 +21,14 @@ namespace JobSphere.Services.Users
 
         public async Task<User> CreateUserAsync(CreateUserDto createUserDto)
         {
+            //TODO: chack if user already exists
+            var existingUser = await _userRepository.GetByUserEmailAsync(createUserDto.Email);
+            if (existingUser != null)
+            {
+                throw new InvalidOperationException("A user with the same Email is already registred");
+            }
             var user = _mapper.Map<User>(createUserDto);
+            user.Role = createUserDto.Role;
             await _userRepository.CreateAsync(user);
             return user;
         }

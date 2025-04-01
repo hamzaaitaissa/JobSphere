@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using JobSphere.ENUMS;
+using System.ComponentModel.DataAnnotations;
 
 namespace JobSphere.DTOs.Users
 {
@@ -13,5 +14,7 @@ namespace JobSphere.DTOs.Users
         [Required]
         [MinLength(8)]
         public string Password { get; set; }
+        [Required]
+        public UserRole Role { get; set; } = UserRole.JobSeeker;
     }
 }

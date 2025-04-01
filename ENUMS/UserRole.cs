@@ -4,7 +4,7 @@
     {
         Admin,
         Employer,
-        JobSeeker,
-        Visitor
+        JobSeeker
+        
     }
 }

@@ -19,6 +19,8 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="Policies\Handlers\" />
+    <Folder Include="Policies\Requirements\" />
   </ItemGroup>
 
 </Project>
