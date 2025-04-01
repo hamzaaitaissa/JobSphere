@@ -1,4 +1,6 @@
-﻿namespace JobSphere.Entities
+﻿using JobSphere.ENUMS;
+
+namespace JobSphere.Entities
 {
     public class User
     {
@@ -6,6 +8,7 @@
         public string FullName { get; set; }
         public string Email { get; set; }
         public string HashedPassword { get; set; }
+        public UserRole Role { get; set; } = UserRole.Visitor;
         public DateTime CreationTime { get; set; } = DateTime.UtcNow;
         
     }
