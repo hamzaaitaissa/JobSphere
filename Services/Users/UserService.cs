@@ -37,10 +37,10 @@ namespace JobSphere.Services.Users
             await _userRepository.DeleteAsync(id);
         }
 
-        public async Task<IEnumerable<User>> GetAllUsersAsync()
+        public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
         {
             var users = await _userRepository.GetAllAsync();
-            var userDto = _mapper.Map<IEnumerable<User>>(users);
+            var userDto = _mapper.Map<IEnumerable<UserDto>>(users);
             return userDto;
         }
 

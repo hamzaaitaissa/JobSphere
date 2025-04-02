@@ -5,7 +5,7 @@ namespace JobSphere.Services.Users
 {
     public interface IUserService
     {
-        Task<IEnumerable<User>> GetAllUsersAsync();
+        Task<IEnumerable<UserDto>> GetAllUsersAsync();
         Task<UserDto> GetUserByIdAsync(int id);
         Task<UserDto> GetUserByEmailAsync(string Email);
         Task<User> CreateUserAsync(CreateUserDto createUserDto);

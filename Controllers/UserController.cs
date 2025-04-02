@@ -23,10 +23,17 @@ namespace JobSphere.Controllers
             return await _userService.GetUserByIdAsync(id);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<UserDto>> GetUserByEmail([FromQuery] string email)
+        [HttpGet("{email}")]
+        public async Task<ActionResult<UserDto>> GetUserByEmailAsync([FromQuery] string email)
         {
             return await _userService.GetUserByEmailAsync(email);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetAllUsersAsync()
+        {
+            var users = await _userService.GetAllUsersAsync();
+            return Ok(users);
         }
     }
 }
