@@ -13,7 +13,7 @@ namespace JobSphere.DTOs.Users
         [EmailAddress]
         public string Email { get; set; }
         [Required]
-        public UserRole Role { get; set; } = UserRole.JobSeeker;
+        public string Role { get; set; }
         //[Required]
         //[MinLength(8)]
         //public string HashedPassword { get; set; }

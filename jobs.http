@@ -7,3 +7,5 @@ Content-Type: application/json
   "Email": "HamzaOG@test.com",
   "Password": "12345678"
 }
+###
+GET http://localhost:5134/api/user/1

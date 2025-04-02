@@ -10,7 +10,8 @@ namespace JobSphere.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<User, UserDto>();
+            CreateMap<User, UserDto>()
+                .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role.ToString()));
             CreateMap<CreateUserDto, User>().
                 ForMember(dest => dest.HashedPassword, opt => opt.MapFrom(src => HashPassword(src.Password)));
             CreateMap<UpdateUserDto, User>().

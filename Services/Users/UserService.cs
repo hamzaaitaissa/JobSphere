@@ -51,10 +51,15 @@ namespace JobSphere.Services.Users
             return userEmailDto;
         }
 
-        public async Task<User> GetUserByIdAsync(int id)
+        public async Task<UserDto> GetUserByIdAsync(int id)
         {
             var user = await _userRepository.GetByIdAsync(id);
-            var userDto = _mapper.Map<User>(user);
+            if (user == null)
+            {
+                throw new KeyNotFoundException("User not found");
+            }
+
+            var userDto = _mapper.Map<UserDto>(user);
             return userDto;
 
         }
