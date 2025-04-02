@@ -44,10 +44,10 @@ namespace JobSphere.Services.Users
             return userDto;
         }
 
-        public async Task<User> GetUserByEmailAsync(string Email)
+        public async Task<UserDto> GetUserByEmailAsync(string Email)
         {
             var userEmail = await _userRepository.GetByUserEmailAsync(Email);
-            var userEmailDto = _mapper.Map<User>(userEmail);
+            var userEmailDto = _mapper.Map<UserDto>(userEmail);
             return userEmailDto;
         }
 
