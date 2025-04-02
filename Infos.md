@@ -17,3 +17,7 @@ Can apply for jobs, upload resumes, and get notifications.
 
 Can save jobs and track application status.
 
+//I keep forgetting these
+dotnet ef migrations add ""mssg
+dotnet ef database update
+

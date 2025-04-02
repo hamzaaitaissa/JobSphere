@@ -28,7 +28,6 @@ namespace JobSphere.Services.Users
                 throw new InvalidOperationException("A user with the same Email is already registred");
             }
             var user = _mapper.Map<User>(createUserDto);
-            user.Role = createUserDto.Role;
             await _userRepository.CreateAsync(user);
             return user;
         }

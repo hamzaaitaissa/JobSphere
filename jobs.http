@@ -1,0 +1,9 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+Post http://localhost:5134/api/auth/signup
+Content-Type: application/json
+{
+  "FullName":"Hamza Hamza",
+  "Email": "HamzaOG@test.com",
+  "Password": "12345678"
+}

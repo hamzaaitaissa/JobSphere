@@ -47,12 +47,11 @@ namespace JobSphere.Repositories.Users
 
         public async Task<User> GetByUserEmailAsync(string Email)
         {
-            var user = await _jobSphereContext.Users.FindAsync($"{Email}");
-            if (user != null)
-            {
-                return user;
-            }
-            throw new KeyNotFoundException($"User with email {Email} not found.");
+            var user = await _jobSphereContext.Users.FirstOrDefaultAsync(u => u.Email == Email); ;
+
+            return user;
+
+
         }
 
         public async Task UpdateAsync(User user)

@@ -69,6 +69,7 @@ namespace JobSphere.Controllers
 
         }
 
+        [HttpPost("signup")]
         public async Task<ActionResult<User>> RegisterUser([FromBody] CreateUserDto createUserDto)
         {
             //if the request is bad 👎🏻 didnt pass the validation rules
