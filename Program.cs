@@ -1,10 +1,13 @@
 using JobSphere.Data;
 using JobSphere.ENUMS;
 using JobSphere.Mapping;
+using JobSphere.Policies.Handlers;
+using JobSphere.Policies.Requirements;
 using JobSphere.Repositories;
 using JobSphere.Repositories.Users;
 using JobSphere.Services.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -16,8 +19,8 @@ var builder = WebApplication.CreateBuilder(args);
 //addinh authorization
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("RequireEmployer", policy => policy.RequireRole(UserRole.Employer.ToString()));
-    options.AddPolicy("RequireAdmin", policy => policy.RequireRole(UserRole.Admin.ToString()));
+    options.AddPolicy("UserOwnershipPolicy", policy =>
+       policy.Requirements.Add(new UserOwnershipRequirement()));
 });
 //jwt authentication
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
@@ -55,6 +58,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 }); ;
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddSingleton<IAuthorizationHandler, UserOwnershipHandler>();
 
 var app = builder.Build();
 

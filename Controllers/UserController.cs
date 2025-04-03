@@ -1,6 +1,7 @@
 ﻿using JobSphere.DTOs.Users;
 using JobSphere.Entities;
 using JobSphere.Services.Users;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,5 +36,14 @@ namespace JobSphere.Controllers
             var users = await _userService.GetAllUsersAsync();
             return Ok(users);
         }
+
+        [Authorize(Roles = "Admin", Policy = "UserOwnershipPolicy")]
+        [HttpDelete]
+        public async Task<ActionResult> DeleteUserAsync(int id)
+        {
+            await _userService.DeleteUserAsync(id);
+            return Ok("User deleted Successfully");
+        }
+
     }
 }
