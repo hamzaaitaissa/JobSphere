@@ -4,6 +4,7 @@ using JobSphere.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobSphere.Migrations
 {
     [DbContext(typeof(JobSphereContext))]
-    partial class JobSphereContextModelSnapshot : ModelSnapshot
+    [Migration("20250403113202_seedingTags")]
+    partial class seedingTags
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,7 +47,6 @@ namespace JobSphere.Migrations
                         .HasColumnType("bit");
 
                     b.Property<decimal?>("Salary")
-                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Title")
@@ -110,61 +112,61 @@ namespace JobSphere.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2025, 4, 3, 11, 32, 1, 527, DateTimeKind.Utc).AddTicks(1998),
                             Title = "Software Development"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2025, 4, 3, 11, 32, 1, 527, DateTimeKind.Utc).AddTicks(2360),
                             Title = "Marketing"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2025, 4, 3, 11, 32, 1, 527, DateTimeKind.Utc).AddTicks(2361),
                             Title = "Remote"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2025, 4, 3, 11, 32, 1, 527, DateTimeKind.Utc).AddTicks(2362),
                             Title = "Finance"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2025, 4, 3, 11, 32, 1, 527, DateTimeKind.Utc).AddTicks(2363),
                             Title = "Sales"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2025, 4, 3, 11, 32, 1, 527, DateTimeKind.Utc).AddTicks(2363),
                             Title = "Healthcare"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2025, 4, 3, 11, 32, 1, 527, DateTimeKind.Utc).AddTicks(2364),
                             Title = "Customer Support"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2025, 4, 3, 11, 32, 1, 527, DateTimeKind.Utc).AddTicks(2365),
                             Title = "Project Management"
                         },
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2025, 4, 3, 11, 32, 1, 527, DateTimeKind.Utc).AddTicks(2365),
                             Title = "Engineering"
                         },
                         new
                         {
                             Id = 10,
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2025, 4, 3, 11, 32, 1, 527, DateTimeKind.Utc).AddTicks(2366),
                             Title = "Education"
                         });
                 });
