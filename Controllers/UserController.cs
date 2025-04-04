@@ -45,5 +45,12 @@ namespace JobSphere.Controllers
             return Ok("User deleted Successfully");
         }
 
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateUserAsync(int id, [FromBody] UpdateUserDto updateUserDto)
+        {
+            await _userService.UpdateUserAsync(updateUserDto, id);
+            return Ok();
+        }
+
     }
 }

@@ -66,6 +66,11 @@ namespace JobSphere.Services.Users
 
         public async Task UpdateUserAsync(UpdateUserDto updateUserDto, int id)
         {
+            var userExist = _userRepository.GetByIdAsync(id);
+            if (userExist == null)
+            {
+                throw new KeyNotFoundException("User not found");
+            }
             var userDto = _mapper.Map<User>(updateUserDto);
             await _userRepository.UpdateAsync(userDto);
         }
