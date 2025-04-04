@@ -1,6 +1,7 @@
 using JobSphere.Data;
 using JobSphere.ENUMS;
 using JobSphere.Mapping;
+using JobSphere.Middleware;
 using JobSphere.Policies.Handlers;
 using JobSphere.Policies.Requirements;
 using JobSphere.Repositories;
@@ -48,17 +49,28 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddDbContext<JobSphereContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Register HttpContextAccessor (needed for the modified UserOwnershipHandler)
+builder.Services.AddHttpContextAccessor();
+
+// Registerin Handlers as Scoped
+builder.Services.AddSingleton<IAuthorizationHandler, UserOwnershipHandler>();
+builder.Services.AddSingleton<IAuthorizationMiddlewareResultHandler, CustomAuthorizationMiddlewareResultHandler>(); // LIKELY NEEDS TO BE SCOPED
+
+// Registering AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+// Registering Controllers
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
-    //options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
     options.JsonSerializerOptions.WriteIndented = true; // Optional: for better readability
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
 
-}); ;
+// Registering Repositories and Services as Scoped
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddSingleton<IAuthorizationHandler, UserOwnershipHandler>();
+
 
 var app = builder.Build();
 

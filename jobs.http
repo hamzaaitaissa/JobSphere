@@ -3,8 +3,8 @@
 Post http://localhost:5134/api/auth/signup
 Content-Type: application/json
 {
-  "FullName":"Hamza Hamza",
-  "Email": "HamzaOG@test.com",
+  "FullName":"Hamza bro",
+  "Email": "HamzaOG2@test.com",
   "Password": "12345678"
 }
 ###
@@ -13,3 +13,22 @@ GET http://localhost:5134/api/user/1
 GET http://localhost:5134/api/user?email=HamzaOG@test.com
 ###
 GET http://localhost:5134/api/user
+### 
+POST http://localhost:5134/api/auth/login
+Content-Type: application/json
+{
+
+  "Email": "HamzaOG2@test.com",
+  "Password": "12345678"
+}
+### 
+PUT http://localhost:5134/api/user/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJIYW16YU9HQHRlc3QuY29tIiwianRpIjoiMjMyMTJmZjctZmVhOS00YWM4LWI0NjItNzhmY2UzYWFjYjQ5IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiSm9iU2Vla2VyIiwiZXhwIjoxNzQzNzcyMzE2LCJpc3MiOiJZb3VyQXBwSXNzdWVyIiwiYXVkIjoiWW91ckFwcEF1ZGllbmNlIn0.7s24hmTk1hIVHmWrDOim4kgO9C4kEhpslmn_9ZRPWEM
+Content-Type: application/json
+{
+
+  "FullName":"Hamza Hamza",
+  "Email": "HamzaUser@test.com",
+  "Password": "12345678"
+
+}

@@ -44,10 +44,12 @@ namespace JobSphere.Controllers
             await _userService.DeleteUserAsync(id);
             return Ok("User deleted Successfully");
         }
-
+        
         [HttpPut("{id}")]
+        [Authorize(Policy = "UserOwnershipPolicy")]
         public async Task<ActionResult> UpdateUserAsync(int id, [FromBody] UpdateUserDto updateUserDto)
         {
+            System.Diagnostics.Debug.WriteLine("Hey");
             await _userService.UpdateUserAsync(updateUserDto, id);
             return Ok();
         }

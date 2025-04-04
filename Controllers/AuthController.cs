@@ -3,7 +3,6 @@ using JobSphere.DTOs.Auth;
 using JobSphere.DTOs.Users;
 using JobSphere.Entities;
 using JobSphere.Services.Users;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -33,7 +32,7 @@ namespace JobSphere.Controllers
         public async Task<ActionResult> Login([FromBody] LoginDto loginDto)
         {
             // first finding user by email and password
-            var user = await _jobSphereContext.Users.SingleOrDefaultAsync(u=> u.Email == loginDto.Email );
+            var user = await _jobSphereContext.Users.SingleOrDefaultAsync(u => u.Email == loginDto.Email);
             if (user == null)
             {
                 return Unauthorized("Invalid Credentials");
@@ -42,10 +41,12 @@ namespace JobSphere.Controllers
             //now creating claims baby
             var claims = new[]
             {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), //ts is Important for ownership
                 new Claim(JwtRegisteredClaimNames.Sub, loginDto.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(ClaimTypes.Role, user.Role.ToString())
             };
+
             // now I retrieve JWT settings from configuration
             var jwtSettings = _configuration.GetSection("JwtSettings");
             var secretKey = jwtSettings.GetValue<string>("SecretKey");
@@ -81,7 +82,7 @@ namespace JobSphere.Controllers
             {
                 var res = await _userService.CreateUserAsync(createUserDto);
                 return Ok(res);
-            } 
+            }
             catch (ValidationException ex)
             {
                 return BadRequest(ex.Message);
