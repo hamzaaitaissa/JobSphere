@@ -1,6 +1,12 @@
-﻿namespace JobSphere.Services.Jobs
+﻿using JobSphere.Entities;
+
+namespace JobSphere.Services.Jobs
 {
-    public class JobService
+    public class JobService : IJobService
     {
+        public Task<IEnumerable<Job>> GetAllJobsAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
