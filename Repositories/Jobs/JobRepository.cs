@@ -22,8 +22,8 @@ namespace JobSphere.Repositories.Jobs
 
         public async Task DeleteAsync(int id)
         {
-             var job = await _jobSphereContext.Jobs.FindAsync(id);
-            if(job != null)
+            var job = await _jobSphereContext.Jobs.FindAsync(id);
+            if (job != null)
             {
                 _jobSphereContext.Remove(job);
                 await _jobSphereContext.SaveChangesAsync();
@@ -37,14 +37,17 @@ namespace JobSphere.Repositories.Jobs
 
         public async Task<IEnumerable<Job>> GetAllAsync()
         {
-            var jobs = await _jobSphereContext.Jobs.ToListAsync();
+            var jobs = await _jobSphereContext.Jobs
+            .Include(j => j.JobTags)
+            .ThenInclude(jt => jt.Tag)
+            .ToListAsync(); ;
             return jobs;
         }
 
         public async Task<Job> GetByIdAsync(int id)
         {
             var job = await _jobSphereContext.Jobs.FindAsync(id);
-            if(job != null)
+            if (job != null)
             {
                 return job;
             }

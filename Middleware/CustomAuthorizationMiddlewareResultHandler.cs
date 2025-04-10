@@ -27,6 +27,15 @@ namespace JobSphere.Middleware
                 await context.Response.WriteAsJsonAsync(response);
                 return;
             }
+            if (authorizeResult.Succeeded)
+            {
+                context.Response.StatusCode = StatusCodes.Status403Forbidden;
+                context.Response.ContentType = "application/json";
+
+                var response = new { message = "Done Successfully!" };
+                await context.Response.WriteAsJsonAsync(response);
+                return;
+            }
 
             await _defaultHandler.HandleAsync(next, context, policy, authorizeResult);
         }

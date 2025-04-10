@@ -2,6 +2,7 @@
 using JobSphere.DTOs.Jobs;
 using JobSphere.Entities;
 using JobSphere.Repositories.Jobs;
+using System.Linq;
 using System.Security.Claims;
 
 namespace JobSphere.Services.Jobs
@@ -36,44 +37,76 @@ namespace JobSphere.Services.Jobs
             return job;
         }
 
-        Task IJobService.DeleteJobAsync(int id)
+        async Task IJobService.DeleteJobAsync(int id)
         {
-            throw new NotImplementedException();
+            var job = await _jobRepository.GetByIdAsync(id);
+            if(job != null)
+            {
+                await _jobRepository.DeleteAsync(id);
+            }
+            
         }
 
-        Task<IEnumerable<Job>> IJobService.GetAllJobsAsync()
+        async Task<IEnumerable<Job>> IJobService.GetAllJobsAsync()
         {
-            throw new NotImplementedException();
+            var jobs = await _jobRepository.GetAllAsync();
+            return jobs;
         }
 
-        Task<Job> IJobService.GetJobByIdAsync()
+        async Task<Job> IJobService.GetJobByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var job = await _jobRepository.GetByIdAsync(id);
+            return job;
         }
 
-        Task<Job> IJobService.GetJobByNameAsync(string Name)
+        async Task<IEnumerable<Job>> IJobService.GetJobsByNameAsync(string Name)
         {
-            throw new NotImplementedException();
+            var jobs = await _jobRepository.GetAllAsync();
+            var jobsByName = jobs.Where(j => j.Title.Contains(Name, StringComparison.OrdinalIgnoreCase));
+            return jobsByName;
         }
 
-        Task<IEnumerable<Job>> IJobService.GetJobsByEmployerAsync(int employerId)
+        async Task<IEnumerable<Job>> IJobService.GetJobsByEmployerAsync(int employerId)
         {
-            throw new NotImplementedException();
+            var jobs = await _jobRepository.GetAllAsync();
+            var jobsByEmployer = jobs.Where(j => j.EmployerId == employerId);
+            return jobsByEmployer;
         }
 
-        Task<IEnumerable<Job>> IJobService.GetJobsByTagsAsync(List<string> tagTitles)
+        async Task<IEnumerable<Job>> IJobService.GetJobsByTagsAsync(List<string> tagTitles)
         {
-            throw new NotImplementedException();
+            var jobs = await _jobRepository.GetAllAsync();
+
+            var jobsByTags = jobs.Where(job =>
+                job.JobTags.Any(jt =>
+                    tagTitles.Contains(jt.Tag.Title, StringComparer.OrdinalIgnoreCase)
+                )).ToList();
+
+            return jobsByTags;
         }
 
-        Task IJobService.ToggleJobStatusAsync(int jobId)
+        async Task<string> IJobService.ToggleJobStatusAsync(int jobId)
         {
-            throw new NotImplementedException();
+            var job = await _jobRepository.GetByIdAsync(jobId);
+            if (job == null) throw new KeyNotFoundException($"Job with ID {jobId} not found.");
+
+            job.IsOpen = !job.IsOpen;
+            await _jobRepository.UpdateAsync(jobId, job);
+
+            return job.IsOpen ? "Job is now open" : "Job is now closed";
         }
 
-        Task IJobService.UpdateJobAsync(int id, UpdateJobDto updateJobDto)
+        async Task IJobService.UpdateJobAsync(int id, UpdateJobDto updateJobDto)
         {
-            throw new NotImplementedException();
+            var existingJob = await _jobRepository.GetByIdAsync(id);
+            if (existingJob == null) throw new KeyNotFoundException($"Job with ID {id} not found.");
+
+            _mapper.Map(updateJobDto, existingJob);
+
+            existingJob.UpdatedAt = DateTime.UtcNow;
+
+            await _jobRepository.UpdateAsync(id, existingJob);
+
         }
     }
 }
