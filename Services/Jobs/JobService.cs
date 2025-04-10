@@ -2,6 +2,7 @@
 using JobSphere.DTOs.Jobs;
 using JobSphere.Entities;
 using JobSphere.Repositories.Jobs;
+using System.Security.Claims;
 
 namespace JobSphere.Services.Jobs
 {
@@ -9,11 +10,13 @@ namespace JobSphere.Services.Jobs
     {
         private readonly IJobRepository _jobRepository;
         private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public JobService(IJobRepository jobRepository, IMapper mapper)
+        public JobService(IJobRepository jobRepository, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             _jobRepository = jobRepository;
             _mapper = mapper;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<IEnumerable<Job>> GetAllJobsAsync()
@@ -22,9 +25,15 @@ namespace JobSphere.Services.Jobs
             return jobs;
         }
 
-        Task<Job> IJobService.CreateJobAsync(CreateJobDto createJobDto)
+        async Task<Job> IJobService.CreateJobAsync(CreateJobDto createJobDto)
         {
-            throw new NotImplementedException();
+            var employerId = int.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            createJobDto.EmployerId = employerId;
+
+            var job = _mapper.Map<Job>(createJobDto);
+            await _jobRepository.CreateAsync(job);
+            //thank god there is a middleware
+            return job;
         }
 
         Task IJobService.DeleteJobAsync(int id)
