@@ -59,8 +59,8 @@ namespace JobSphere.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<Job>> UpdateJobAsync(int id, UpdateJobDto updateJobDto)
         {
-            var job = await _jobService.UpdateJobAsync(id, updateJobDto);
-            return Ok(job);
+             await _jobService.UpdateJobAsync(id, updateJobDto);
+            return Ok("Job Updated Successfully");
         }
 
         [HttpGet("tags")]
