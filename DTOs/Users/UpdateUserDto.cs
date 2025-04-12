@@ -15,6 +15,6 @@ namespace JobSphere.DTOs.Users
         [MinLength(8)]
         public string Password { get; set; }
         [Required]
-        public UserRole Role { get; set; } = UserRole.JobSeeker;
+        public UserRole Role { get; set; } 
     }
 }

@@ -5,6 +5,7 @@ using JobSphere.Services.Jobs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace JobSphere.Controllers
 {
@@ -39,10 +40,12 @@ namespace JobSphere.Controllers
             return Ok(job);
         }
 
-        [Authorize]
+        
         [HttpPost]
+        //[Authorize(Roles = "JobSeeker")]
         public async Task<ActionResult<Job>> CreateJobAsync(CreateJobDto createJobDto)
         {
+            Debug.WriteLine("CreateJob called");
             var job = await _jobService.CreateJobAsync(createJobDto);
             return Ok(job);
         }

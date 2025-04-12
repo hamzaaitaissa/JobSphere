@@ -3,8 +3,8 @@
 Post http://localhost:5134/api/auth/signup
 Content-Type: application/json
 {
-  "FullName":"Hamza bro",
-  "Email": "HamzaOG2@test.com",
+  "FullName":"Ali",
+  "Email": "Ali@test.com",
   "Password": "12345678"
 }
 ###
@@ -18,17 +18,29 @@ POST http://localhost:5134/api/auth/login
 Content-Type: application/json
 {
 
-  "Email": "HamzaOG2@test.com",
+  "Email": "Ali@test.com",
   "Password": "12345678"
 }
 ### 
-PUT http://localhost:5134/api/user/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJIYW16YU9HQHRlc3QuY29tIiwianRpIjoiMjMyMTJmZjctZmVhOS00YWM4LWI0NjItNzhmY2UzYWFjYjQ5IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiSm9iU2Vla2VyIiwiZXhwIjoxNzQzNzcyMzE2LCJpc3MiOiJZb3VyQXBwSXNzdWVyIiwiYXVkIjoiWW91ckFwcEF1ZGllbmNlIn0.7s24hmTk1hIVHmWrDOim4kgO9C4kEhpslmn_9ZRPWEM
+PUT http://localhost:5134/api/user/1003
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEwMDMiLCJzdWIiOiJBbGlAdGVzdC5jb20iLCJlbWFpbCI6IkFsaUB0ZXN0LmNvbSIsImp0aSI6ImI2ODQ4Y2UyLTY2ZmMtNGRmYy1hYmFkLThmNWJiYmU1NzVhNiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkpvYlNlZWtlciIsImV4cCI6MTc0NDUwNjY4MiwiaXNzIjoiWW91ckFwcElzc3VlciIsImF1ZCI6IllvdXJBcHBBdWRpZW5jZSJ9.MlswAiXQv88NxLbVssxxM0T7iD91AT4zit0XQ3yeENQ
 Content-Type: application/json
 {
 
   "FullName":"Hamza Hamza",
   "Email": "HamzaUser@test.com",
   "Password": "12345678"
+  "Role":1
+}
 
+### 
+POST http://localhost:5134/api/job
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEwMDMiLCJzdWIiOiJBbGlAdGVzdC5jb20iLCJlbWFpbCI6IkFsaUB0ZXN0LmNvbSIsImp0aSI6ImI2ODQ4Y2UyLTY2ZmMtNGRmYy1hYmFkLThmNWJiYmU1NzVhNiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkpvYlNlZWtlciIsImV4cCI6MTc0NDUwNjY4MiwiaXNzIjoiWW91ckFwcElzc3VlciIsImF1ZCI6IllvdXJBcHBBdWRpZW5jZSJ9.MlswAiXQv88NxLbVssxxM0T7iD91AT4zit0XQ3yeENQ
+
+{
+  "title": "Senior .NET Developer",
+  "description": "We are looking for a senior backend developer with strong .NET skills.",
+  "salary": 75000,
+  "isOpen": true,
+  "jobTags": [1,3,9]
 }

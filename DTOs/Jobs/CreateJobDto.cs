@@ -9,11 +9,10 @@ namespace JobSphere.DTOs.Jobs
         [Required]
         public string Description { get; set; }
         [Required]
-        public int EmployerId { get; set; }
         public decimal? Salary { get; set; }
         [Required]
         public bool IsOpen { get; set; } = true;
         [Required]
-        public List<string> JobTags { get; set; } = new();
+        public List<int> JobTags { get; set; } = new();
     }
 }

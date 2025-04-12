@@ -11,12 +11,13 @@ namespace JobSphere.Services.Users
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        private readonly IPasswordHasher<User> _passwordHasher;
+        private readonly IPasswordHasherService _passwordHasher;
 
-        public UserService(IUserRepository userRepository, IMapper mapper)
+        public UserService(IPasswordHasherService passwordHasher, IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
             _mapper = mapper;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task<User> CreateUserAsync(CreateUserDto createUserDto)
@@ -27,7 +28,17 @@ namespace JobSphere.Services.Users
             {
                 throw new InvalidOperationException("A user with the same Email is already registred");
             }
-            var user = _mapper.Map<User>(createUserDto);
+            (string passwordHash, byte[] passwordSalt) = _passwordHasher.HashPassword(createUserDto.Password);
+
+            var user = new User
+            {
+                FullName = createUserDto.FullName, // Get from DTO
+                Email = createUserDto.Email,
+                HashedPassword = passwordHash,  // Store the hash
+                PasswordSalt = passwordSalt,   // Store the salt
+                Role = UserRole.JobSeeker,   // Or get from DTO if applicable
+                CreationTime = DateTime.UtcNow
+            }; 
             await _userRepository.CreateAsync(user);
             return user;
         }
@@ -71,7 +82,16 @@ namespace JobSphere.Services.Users
             {
                 throw new KeyNotFoundException("User not found");
             }
-            _mapper.Map(updateUserDto, userExist);
+            (string passwordHash, byte[] passwordSalt) = _passwordHasher.HashPassword(updateUserDto.Password);
+            var user = new User
+            {
+                FullName = updateUserDto.FullName, // Get from DTO
+                Email = updateUserDto.Email,
+                HashedPassword = passwordHash,  // Store the hash
+                PasswordSalt = passwordSalt,   // Store the salt
+                Role = updateUserDto.Role,   // Or get from DTO if applicable
+                CreationTime = DateTime.UtcNow
+            };
             await _userRepository.UpdateAsync(userExist);
         }
     }

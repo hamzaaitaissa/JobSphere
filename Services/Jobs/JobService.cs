@@ -12,11 +12,13 @@ namespace JobSphere.Services.Jobs
         private readonly IJobRepository _jobRepository;
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ILogger<JobService> _logger;
 
-        public JobService(IJobRepository jobRepository, IMapper mapper, IHttpContextAccessor httpContextAccessor)
+        public JobService(ILogger<JobService> logger, IJobRepository jobRepository, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             _jobRepository = jobRepository;
             _mapper = mapper;
+            _logger = logger;
             _httpContextAccessor = httpContextAccessor;
         }
 
@@ -28,12 +30,28 @@ namespace JobSphere.Services.Jobs
 
         async Task<Job> IJobService.CreateJobAsync(CreateJobDto createJobDto)
         {
-            var employerId = int.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            createJobDto.EmployerId = employerId;
+            var userPrincipal = _httpContextAccessor.HttpContext?.User; 
+
+            if (userPrincipal == null)
+            {
+                // This shouldn't happen if [Authorize] is working, but good to check
+                throw new InvalidOperationException("HttpContext or User principal not available.");
+            }
+
+            var userIdClaim = userPrincipal.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out var employerId))
+            {
+                // Log this critical error - indicates a problem with the token or claim setup
+                _logger.LogError("Could not find or parse required NameIdentifier claim for job creation.");
+                throw new InvalidOperationException("User ID claim (NameIdentifier) is missing or invalid in the token.");
+            }
+
 
             var job = _mapper.Map<Job>(createJobDto);
+            job.EmployerId = employerId; 
             await _jobRepository.CreateAsync(job);
-            //thank god there is a middleware
+
             return job;
         }
 
