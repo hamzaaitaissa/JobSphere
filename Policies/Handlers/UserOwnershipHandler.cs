@@ -16,35 +16,7 @@ namespace JobSphere.Policies.Handlers
         }
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, UserOwnershipRequirement requirement)
         {
-            //System.Diagnostics.Debug.WriteLine("Hello");
-            //var loggedInUserId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            //System.Diagnostics.Debug.WriteLine(loggedInUserId);
-            //if (string.IsNullOrEmpty(loggedInUserId))
-            //{
-            //    context.Fail();
-            //    return Task.CompletedTask;
-            //}
-
-            //// Get the user ID that the action is trying to edit (from the URL)
-            //var userIdBeingEdited = _httpContextAccessor.HttpContext?.GetRouteData()?.Values;
-            //System.Diagnostics.Debug.WriteLine("id "+userIdBeingEdited);
-            //if (userIdBeingEdited == null)
-            //{
-            //    context.Fail();
-            //    return Task.CompletedTask;
-            //}
-
-            //// Check if the logged-in user's ID matches the ID being edited
-            //if (loggedInUserId == userIdBeingEdited.ToString())
-            //{
-            //    context.Succeed(requirement);  // If they match, allow the edit
-            //}
-            //else
-            //{
-            //    context.Fail();  // If they don't match, deny access
-            //}
-
-            //return Task.CompletedTask;
+            
             var userIdClaim = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var userRoleClaim = context.User.FindFirst(ClaimTypes.Role)?.Value;
 
