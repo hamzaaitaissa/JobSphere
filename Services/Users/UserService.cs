@@ -85,14 +85,14 @@ namespace JobSphere.Services.Users
             (string passwordHash, byte[] passwordSalt) = _passwordHasher.HashPassword(updateUserDto.Password);
             var user = new User
             {
-                FullName = updateUserDto.FullName, // Get from DTO
+                FullName = updateUserDto.FullName,
                 Email = updateUserDto.Email,
-                HashedPassword = passwordHash,  // Store the hash
-                PasswordSalt = passwordSalt,   // Store the salt
-                Role = updateUserDto.Role,   // Or get from DTO if applicable
+                HashedPassword = passwordHash,
+                PasswordSalt = passwordSalt,
+                Role = (UserRole)updateUserDto.Role,
                 CreationTime = DateTime.UtcNow
             };
-            await _userRepository.UpdateAsync(userExist);
+            await _userRepository.UpdateAsync(user);
         }
     }
 }

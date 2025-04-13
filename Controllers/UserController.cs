@@ -51,7 +51,7 @@ namespace JobSphere.Controllers
         {
             System.Diagnostics.Debug.WriteLine("Hey");
             await _userService.UpdateUserAsync(updateUserDto, id);
-            return Ok();
+            return Ok("User Updated Successfully");
         }
 
     }
