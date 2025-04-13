@@ -42,7 +42,7 @@ namespace JobSphere.Controllers
 
         
         [HttpPost]
-        //[Authorize(Roles = "JobSeeker")]
+        [Authorize]
         public async Task<ActionResult<Job>> CreateJobAsync(CreateJobDto createJobDto)
         {
             Debug.WriteLine("CreateJob called");
