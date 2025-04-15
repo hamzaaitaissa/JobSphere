@@ -85,7 +85,7 @@ builder.Services.AddDbContext<JobSphereContext>(options =>
 builder.Services.AddHttpContextAccessor();
 
 // Registerin Handlers as Scoped
-builder.Services.AddSingleton<IAuthorizationHandler, UserOwnershipHandler>();
+builder.Services.AddScoped<IAuthorizationHandler, UserOwnershipHandler>();
 builder.Services.AddSingleton<IAuthorizationMiddlewareResultHandler, CustomAuthorizationMiddlewareResultHandler>(); // LIKELY NEEDS TO BE SCOPED
 
 // Registering AutoMapper

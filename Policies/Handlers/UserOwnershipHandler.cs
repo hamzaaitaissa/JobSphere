@@ -53,14 +53,29 @@ namespace JobSphere.Policies.Handlers
             if (path != null && path.Contains("/jobs"))
             {
                 var job = await _jobRepository.GetByIdAsync(resourceId);
-                if (job != null && job.EmployerId.ToString() == userIdClaim)
+
+                if (job != null)
                 {
-                    Debug.WriteLine("Job belongs to the logged-in user. Access granted.");
-                    context.Succeed(requirement);
+                    // Admin has literally all access on jobs
+                    if (userRoleClaim == "Admin")
+                    {
+                        Debug.WriteLine("User is Admin. Access granted.");
+                        context.Succeed(requirement);
+                    }
+                    // Employer is the only one who can create new jobs or update his ow jobs
+                    else if (userRoleClaim == "Employer" && job.EmployerId.ToString() == userIdClaim)
+                    {
+                        Debug.WriteLine("Employer owns the job. Access granted.");
+                        context.Succeed(requirement);
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Access denied. Job not owned by this Employer.");
+                    }
                 }
                 else
                 {
-                    Debug.WriteLine("Job does not belong to the user.");
+                    Debug.WriteLine("Job not found.");
                 }
             }
             else if (resourceId.ToString() == userIdClaim)
@@ -70,8 +85,9 @@ namespace JobSphere.Policies.Handlers
             }
             else
             {
-                Debug.WriteLine("User ID mismatch.");
+                Debug.WriteLine("User ID mismatch. Access denied.");
             }
+
         }
-        }
+    }
 }

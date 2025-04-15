@@ -13,6 +13,9 @@ namespace JobSphere.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
             modelBuilder.Entity<JobTag>().
                 HasOne(jt => jt.Job)
                 .WithMany(j => j.JobTags)
