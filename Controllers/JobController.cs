@@ -42,7 +42,7 @@ namespace JobSphere.Controllers
 
         
         [HttpPost]
-        [Authorize]
+        [Authorize(Policy = "UserOwnershipPolicy")]
         public async Task<ActionResult<Job>> CreateJobAsync(CreateJobDto createJobDto)
         {
             Debug.WriteLine("CreateJob called");
@@ -50,7 +50,7 @@ namespace JobSphere.Controllers
             return Ok(job);
         }
 
-        [Authorize]
+        [Authorize(Policy = "UserOwnershipPolicy")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteJobAsync(int id)
         {
@@ -58,7 +58,7 @@ namespace JobSphere.Controllers
             return Ok("Job deleted successfully.");
         }
 
-        [Authorize]
+        [Authorize(Policy = "UserOwnershipPolicy")]
         [HttpPut("{id}")]
         public async Task<ActionResult<Job>> UpdateJobAsync(int id, UpdateJobDto updateJobDto)
         {
