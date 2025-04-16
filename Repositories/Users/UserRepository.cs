@@ -47,7 +47,7 @@ namespace JobSphere.Repositories.Users
 
         public async Task<User> GetByUserEmailAsync(string Email)
         {
-            var user = await _jobSphereContext.Users.FirstOrDefaultAsync(u => u.Email == Email); ;
+            var user = await _jobSphereContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email.ToLower() == Email.ToLower());
 
             return user;
 

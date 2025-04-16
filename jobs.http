@@ -10,7 +10,7 @@ Content-Type: application/json
 ###
 GET http://localhost:5134/api/user/1
 ### 
-GET http://localhost:5134/api/user?email=HamzaOG@test.com
+GET http://localhost:5134/api/user?Email=HamzaOG@test.com
 ###
 GET http://localhost:5134/api/user
 ### 

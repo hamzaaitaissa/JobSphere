@@ -25,9 +25,9 @@ namespace JobSphere.Controllers
         }
 
         [HttpGet("{email}")]
-        public async Task<ActionResult<UserDto>> GetUserByEmailAsync([FromQuery] string email)
+        public async Task<ActionResult<UserDto>> GetUserByEmailAsync([FromQuery] string Email)
         {
-            return await _userService.GetUserByEmailAsync(email);
+            return await _userService.GetUserByEmailAsync(Email);
         }
 
         [HttpGet]

@@ -83,7 +83,7 @@ namespace JobSphere.Services.Users
                 throw new KeyNotFoundException("User not found");
             }
             (string passwordHash, byte[] passwordSalt) = _passwordHasher.HashPassword(updateUserDto.Password);
-            var user = new User
+            userExist = new User
             {
                 FullName = updateUserDto.FullName,
                 Email = updateUserDto.Email,
@@ -92,7 +92,7 @@ namespace JobSphere.Services.Users
                 Role = (UserRole)updateUserDto.Role,
                 CreationTime = DateTime.UtcNow
             };
-            await _userRepository.UpdateAsync(user);
+            await _userRepository.UpdateAsync(userExist);
         }
     }
 }
