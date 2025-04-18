@@ -18,5 +18,6 @@ namespace JobSphere.Entities
 
         // Tags soon RS -> (Many-to-Many)
         public ICollection<JobTag> JobTags { get; set; }
+        public ICollection<JobApplication> JobApplications { get; set; }
     }
 }

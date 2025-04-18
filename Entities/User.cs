@@ -13,6 +13,8 @@ namespace JobSphere.Entities
         public byte[] PasswordSalt { get; set; }
         public UserRole Role { get; set; } = UserRole.JobSeeker;
         public DateTime CreationTime { get; set; } = DateTime.UtcNow;
-        
+
+        public ICollection<JobApplication> JobApplications { get; set; }
+
     }
 }
