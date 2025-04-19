@@ -2,7 +2,7 @@
 
 namespace JobSphere.Entities
 {
-    public class JobApplication
+    public class JobApplicationEntity
     {
         public int Id { get; set; }
         public int JobId { get; set; }

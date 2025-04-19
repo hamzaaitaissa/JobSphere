@@ -14,7 +14,7 @@ namespace JobSphere.Entities
         public UserRole Role { get; set; } = UserRole.JobSeeker;
         public DateTime CreationTime { get; set; } = DateTime.UtcNow;
 
-        public ICollection<JobApplication> JobApplications { get; set; }
+        public ICollection<JobApplicationEntity> JobApplications { get; set; }
 
     }
 }

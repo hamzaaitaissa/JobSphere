@@ -10,7 +10,7 @@ namespace JobSphere.Data
         public DbSet<Tag> Tags { get; set; }
         public DbSet<JobTag> jobTags { get; set; }
 
-        public DbSet<JobApplication> JobApplications { get; set; }
+        public DbSet<JobApplicationEntity> JobApplications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,12 +26,12 @@ namespace JobSphere.Data
                 .HasOne(jt => jt.Tag)
                 .WithMany(t => t.JobTags)
                 .HasForeignKey(jt => jt.TagId);
-            modelBuilder.Entity<JobApplication>()
+            modelBuilder.Entity<JobApplicationEntity>()
                 .HasOne(ja => ja.Job)
                 .WithMany(j => j.JobApplications)
                 .HasForeignKey(ja => ja.JobId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
-            modelBuilder.Entity<JobApplication>()
+            modelBuilder.Entity<JobApplicationEntity>()
                 .HasOne(ja => ja.Applicant)
                 .WithMany(u => u.JobApplications)
                 .HasForeignKey(ja => ja.ApplicantId)
