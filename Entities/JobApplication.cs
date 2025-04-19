@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using JobSphere.ENUMS;
+using System.ComponentModel.DataAnnotations;
 
 namespace JobSphere.Entities
 {
@@ -13,6 +14,7 @@ namespace JobSphere.Entities
 
         public string CvPath { get; set; }  
 
-        public DateTime UploadedAt { get; set; }
+        public JobAppStatus Status { get; set; } = JobAppStatus.Pending;
+        public DateTime UploadedAt { get; set; } = DateTime.Now;
     }
 }
