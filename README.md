@@ -51,7 +51,7 @@ JobSphere.Infrastructure--> Data access (EF Core), Repository implementations
 ### Installation
 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/JobSphere.git
+git clone git clone https://github.com/your-username/JobSphere.git
 cd JobSphere
 ```
 2. Update `appsettings.json` with your local SQL Server connection string
