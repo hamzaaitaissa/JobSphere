@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using JobSphere.Services.JobApllication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobSphere.Controllers
@@ -7,5 +8,11 @@ namespace JobSphere.Controllers
     [ApiController]
     public class JobApplicationController : ControllerBase
     {
+        private readonly IJobApplicationService _jobApplicationService;
+
+        public JobApplicationController(IJobApplicationService jobApplicationService)
+        {
+            _jobApplicationService = jobApplicationService;
+        }
     }
 }
