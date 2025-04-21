@@ -61,5 +61,10 @@ namespace JobSphere.Repositories.Jobs
         {
             throw new NotImplementedException();
         }
+        public async Task<Boolean> CheckIsOpenAsync(int id)
+        {
+            var job = await _jobSphereContext.Jobs.FirstOrDefaultAsync(j => j.Id == id);
+            return job.IsOpen;
+        }
     }
 }

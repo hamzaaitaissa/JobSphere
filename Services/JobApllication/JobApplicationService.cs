@@ -16,8 +16,21 @@ namespace JobSphere.Services.JobApllication
             _mapper = mapper;
         }
 
-        public Task<JobApplicationEntity> ApplyJobAsync(CreateJobApplicationDto createJobApplicationDto)
+        public async Task<JobApplicationEntity> ApplyJobAsync(CreateJobApplicationDto createJobApplicationDto)
         {
+            //check if applicant already applied to this job
+            var alreadyApplied = await _jobApplicationRepository.GetByApplicantAndJobIdAsync(createJobApplicationDto.ApplicantId, createJobApplicationDto.JobId);
+            if(alreadyApplied != null)
+            {
+                throw new Exception("You already applied to this job offer");
+            }
+            //check job status
+            var IsJobOpen = await _jobApplicationRepository.CheckJobIsOpenAsync(createJobApplicationDto.JobId);
+            if (!IsJobOpen) throw new Exception("You cannot apply to this Job.");
+            //if al good save jobApplication
+            var jobApplicationMapped = _mapper.Map<JobApplicationEntity>(createJobApplicationDto);
+            var jobApplication = await _jobApplicationRepository.ApplyAsync(jobApplicationMapped);
+            return jobApplication;
             
         }
     }

@@ -6,9 +6,10 @@ namespace JobSphere.Entities.JobApplication
     {
         Task<JobApplicationEntity> ApplyAsync(JobApplicationEntity jobApplicationEntity);
         Task<JobApplicationEntity?> GetByIdAsync(int id);
-        Task<IEnumerable<JobApplicationEntity>> GetByApplicantIdAsync(int applicantId);
+        Task<JobApplicationEntity?> GetByApplicantAndJobIdAsync(int applicantId, int jobId);
         Task<IEnumerable<JobApplicationEntity>> GetByJobIdAsync(int jobId);
         Task<IEnumerable<JobApplicationEntity>> GetAllAsync();
         Task<bool> DeleteAsync(int id);
+        Task<Boolean> CheckJobIsOpenAsync(int id);
     }
 }

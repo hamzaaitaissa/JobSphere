@@ -9,5 +9,6 @@ namespace JobSphere.Repositories.Jobs
         Task<Job> GetByIdAsync(int id);
         Task UpdateAsync(int id, Job job);
         Task DeleteAsync(int id);
+        Task<Boolean> CheckIsOpenAsync(int id);  
     }
 }

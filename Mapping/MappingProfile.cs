@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using JobSphere.DTOs.JobApplication;
 using JobSphere.DTOs.Jobs;
 using JobSphere.DTOs.Users;
 using JobSphere.Entities;
@@ -23,6 +24,7 @@ namespace JobSphere.Mapping
              ? src.JobTags.Select(tagId => new JobTag { TagId = tagId }).ToList()
              : new List<JobTag>()
      ));
+            CreateMap<CreateJobApplicationDto, JobApplicationEntity>();
         }
         private static string HashPassword(string password)
         {
