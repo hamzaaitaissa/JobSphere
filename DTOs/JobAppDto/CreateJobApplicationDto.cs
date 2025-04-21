@@ -1,6 +1,6 @@
 ﻿namespace JobSphere.DTOs.JobApplication
 {
-    public class CreateJobApplication
+    public class CreateJobApplicationDto
     {
         public int JobId { get; set; }
         public int ApplicantId { get; set; }
