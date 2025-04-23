@@ -3,9 +3,10 @@
 Post http://localhost:5134/api/auth/signup
 Content-Type: application/json
 {
-  "FullName":"Ali",
-  "Email": "Ali@test.com",
-  "Password": "12345678"
+  "FullName":"Ali4",
+  "Email": "Ali4@test.com",
+  "Password": "12345678",
+  "Role":1
 }
 ###
 GET http://localhost:5134/api/user/1
@@ -18,7 +19,7 @@ POST http://localhost:5134/api/auth/login
 Content-Type: application/json
 {
 
-  "Email": "Ali@test.com",
+  "Email": "Ali4@test.com",
   "Password": "12345678"
 }
 ### 
@@ -35,7 +36,7 @@ Content-Type: application/json
 
 ### 
 POST http://localhost:5134/api/job
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEwMDMiLCJzdWIiOiJBbGlAdGVzdC5jb20iLCJlbWFpbCI6IkFsaUB0ZXN0LmNvbSIsImp0aSI6ImI2ODQ4Y2UyLTY2ZmMtNGRmYy1hYmFkLThmNWJiYmU1NzVhNiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkpvYlNlZWtlciIsImV4cCI6MTc0NDUwNjY4MiwiaXNzIjoiWW91ckFwcElzc3VlciIsImF1ZCI6IllvdXJBcHBBdWRpZW5jZSJ9.MlswAiXQv88NxLbVssxxM0T7iD91AT4zit0XQ3yeENQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjQiLCJzdWIiOiJBbGk0QHRlc3QuY29tIiwiZW1haWwiOiJBbGk0QHRlc3QuY29tIiwianRpIjoiODIzZGIzOGUtOTVjZi00YTNjLWJlMGMtOTk0OWFjNjk4MWIyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJleHAiOjE3NDU0NDMyMDYsImlzcyI6IllvdXJBcHBJc3N1ZXIiLCJhdWQiOiJZb3VyQXBwQXVkaWVuY2UifQ.8HSfb_8M-lhnePJhLC5NghOWNgPxdMBMbsUAXQex-xo
 
 {
   "title": "Senior .NET Developer",

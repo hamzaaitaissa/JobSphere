@@ -10,13 +10,11 @@ namespace JobSphere.Repositories.JobAppRepo
     public class JobApplicationRepository : IJobApplicationRepository
     {
         private readonly JobSphereContext _JobSphereContext;
-        private readonly ILogger _logger;
         private readonly IJobRepository _jobRepository;
 
-        public JobApplicationRepository(JobSphereContext jobSphereContext, ILogger logger, IJobRepository jobRepository)
+        public JobApplicationRepository(JobSphereContext jobSphereContext, IJobRepository jobRepository)
         {
             _JobSphereContext = jobSphereContext;
-            _logger = logger;
             _jobRepository = jobRepository;
         }
 

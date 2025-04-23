@@ -1,13 +1,16 @@
 using JobSphere.Data;
+using JobSphere.Entities.JobApplication;
 using JobSphere.ENUMS;
 using JobSphere.Mapping;
 using JobSphere.Middleware;
 using JobSphere.Policies.Handlers;
 using JobSphere.Policies.Requirements;
 using JobSphere.Repositories;
+using JobSphere.Repositories.JobAppRepo;
 using JobSphere.Repositories.Jobs;
 using JobSphere.Repositories.Users;
 using JobSphere.Services;
+using JobSphere.Services.JobApllication;
 using JobSphere.Services.Jobs;
 using JobSphere.Services.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -103,6 +106,8 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IJobRepository, JobRepository>();
 builder.Services.AddScoped<IJobService, JobService>();
+builder.Services.AddScoped<IJobApplicationRepository, JobApplicationRepository>();
+builder.Services.AddScoped<IJobApplicationService,JobApplicationService>();
 builder.Services.AddScoped<IPasswordHasherService, Pbkdf2PasswordHasherService>();
 
 

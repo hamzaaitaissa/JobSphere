@@ -36,7 +36,7 @@ namespace JobSphere.Services.Users
                 Email = createUserDto.Email,
                 HashedPassword = passwordHash,  // Store the hash
                 PasswordSalt = passwordSalt,   // Store the salt
-                Role = UserRole.JobSeeker,   // Or get from DTO if applicable
+                Role = createUserDto.Role,   // Or get from DTO if applicable
                 CreationTime = DateTime.UtcNow
             }; 
             await _userRepository.CreateAsync(user);

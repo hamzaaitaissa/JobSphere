@@ -11,7 +11,7 @@ namespace JobSphere.Entities
         public string Email { get; set; }
         public string HashedPassword { get; set; }
         public byte[] PasswordSalt { get; set; }
-        public UserRole Role { get; set; } = UserRole.JobSeeker;
+        public UserRole Role { get; set; }
         public DateTime CreationTime { get; set; } = DateTime.UtcNow;
 
         public ICollection<JobApplicationEntity> JobApplications { get; set; }
