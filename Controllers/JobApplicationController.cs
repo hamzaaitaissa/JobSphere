@@ -1,6 +1,7 @@
 ﻿using JobSphere.DTOs.JobApplication;
 using JobSphere.Entities;
 using JobSphere.Services.JobApllication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,7 @@ namespace JobSphere.Controllers
             _jobApplicationService = jobApplicationService;
         }
         [HttpPost("apply")]
+        [Authorize]
         public async Task<ActionResult<JobApplicationEntity>> ApplyJobAsync([FromBody] CreateJobApplicationDto createJobApplicationDto)
         {
             try
