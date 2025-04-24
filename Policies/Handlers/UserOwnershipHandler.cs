@@ -88,6 +88,14 @@ namespace JobSphere.Policies.Handlers
                 Debug.WriteLine("User ID mismatch. Access denied.");
             }
 
+            if (path != null && path.Contains("/apply"))
+            {
+                if (userRoleClaim == "Employer")
+                {
+                    Debug.WriteLine($"User is Employer, therefore cannot apply");
+                }
+            }
+
         }
     }
 }
